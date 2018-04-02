@@ -99,10 +99,10 @@
                 if (typeof this.options.slick === 'function') {
                     this.slick = this.options.slick(this.$modalElement);
                 } else {
-                    this.slick = this.$modalElement.find('.slick-lightbox-slick').slick($.extend({}, this.options.slick, additional));
+                    this.slick = this.$modalElement.find('.slick-lightbox-slick').nxSlick($.extend({}, this.options.slick, additional));
                 }
             } else {
-                this.slick = this.$modalElement.find('.slick-lightbox-slick').slick(additional);
+                this.slick = this.$modalElement.find('.slick-lightbox-slick').nxSlick(additional);
             }
             return this.$modalElement.trigger('init.slickLightbox');
         };
@@ -336,7 +336,7 @@
         imageMaxHeight: 0.9,
         lazy: false
     };
-    $.fn.slickLightbox = function (options) {
+    $.fn.nxSlickLightbox = function (options) {
         /* Fires the plugin. */
         options = $.extend({}, defaults, options);
         $(this).each(function () {
@@ -344,7 +344,7 @@
         });
         return this;
     };
-    $.fn.unslickLightbox = function () {
+    $.fn.nxUnslickLightbox = function () {
         /* Removes everything. */
         return $(this).trigger('destroy.slickLightbox').each(function () {
             return this.slickLightbox = null;

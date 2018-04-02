@@ -110,9 +110,9 @@ class SlickLightbox
         # TODO: support element's index
         @slick = @options.slick @$modalElement
       else
-        @slick = @$modalElement.find('.slick-lightbox-slick').slick $.extend({}, @options.slick, additional)
+        @slick = @$modalElement.find('.slick-lightbox-slick').nxSlick $.extend({}, @options.slick, additional)
     else
-      @slick = @$modalElement.find('.slick-lightbox-slick').slick(additional)
+      @slick = @$modalElement.find('.slick-lightbox-slick').nxSlick(additional)
     @$modalElement.trigger 'init.slickLightbox'
 
   open: ->
@@ -283,14 +283,14 @@ defaults =
   lazy: false
 
 # jQuery methods
-$.fn.slickLightbox = (options) ->
+$.fn.nxSlickLightbox = (options) ->
   ### Fires the plugin. ###
   options = $.extend {}, defaults, options
   $(this).each ->
     this.slickLightbox = new SlickLightbox this, options
   return this
 
-$.fn.unslickLightbox = ->
+$.fn.nxUnslickLightbox = ->
   ### Removes everything. ###
   $(this).trigger('destroy.slickLightbox').each ->
     this.slickLightbox = null
