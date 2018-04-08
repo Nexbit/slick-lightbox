@@ -19,7 +19,7 @@ lec      = require 'gulp-line-ending-corrector'
 
 gulp.task 'coffee', ->
   gulp
-    .src 'src/scripts/slick-lightbox.coffee'
+    .src 'src/scripts/nx-slick-lightbox.coffee'
     .pipe coffee( bare: true ).on('error', gutil.log)
     .pipe wrapJS("""'use strict';
 (function($) {
@@ -31,7 +31,7 @@ gulp.task 'coffee', ->
 
 gulp.task 'sass', ->
   gulp
-    .src 'src/styles/slick-lightbox.sass'
+    .src 'src/styles/nx-slick-lightbox.sass'
     .pipe sass(outputStyle: 'compressed').on('error', sass.logError)
     .pipe gulp.dest 'dist/'
 
@@ -39,12 +39,12 @@ gulp.task 'sass', ->
 
 gulp.task 'uglify', ->
   gulp
-    .src 'dist/slick-lightbox.js'
-    .pipe uglify 'slick-lightbox.min.js', outSourceMap: true
+    .src 'dist/nx-slick-lightbox.js'
+    .pipe uglify 'nx-slick-lightbox.min.js', outSourceMap: true
     .pipe lec()
     .pipe gulp.dest 'dist/'
 
-gulp.task 'coffeedoc', shell.task(['coffeedoc src/scripts/slick-lightbox.coffee'])
+gulp.task 'coffeedoc', shell.task(['coffeedoc src/scripts/nx-slick-lightbox.coffee'])
 
 gulp.task 'buildGHPages', shell.task(['jade index.jade'])
 

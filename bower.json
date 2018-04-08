@@ -10,9 +10,9 @@
   	"src/index.html"
   ],
   "main": [
-    "dist/slick-lightbox.js",
-    "dist/slick-lightbox.min.js",
-  	"dist/slick-lightbox.css"
+    "dist/nx-slick-lightbox.js",
+    "dist/nx-slick-lightbox.min.js",
+  	"dist/nx-slick-lightbox.css"
   ],
   "dependencies": {
     "jquery": "~1",
