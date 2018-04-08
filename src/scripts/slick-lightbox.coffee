@@ -56,9 +56,9 @@ class SlickLightbox
       else
         imgSourceParams = """ src="#{ source }" """
       """
-        <div class="slick-lightbox-slick-item">
-          <div class="slick-lightbox-slick-item-inner">
-            <img class="slick-lightbox-slick-img" #{ imgSourceParams } />
+        <div class="nx-slick-lightbox-slick-item">
+          <div class="nx-slick-lightbox-slick-item-inner">
+            <img class="nx-slick-lightbox-slick-img" #{ imgSourceParams } />
             #{ caption }
           </div>
         </div>"""
@@ -87,16 +87,16 @@ class SlickLightbox
     links = @createModalItems()
 
     html = """
-    <div class="slick-lightbox slick-lightbox-hide-init#{ if @isIE then ' slick-lightbox-ie' else '' }" style="background: #{ @options.background };">
-      <div class="slick-lightbox-inner">
-        <div class="slick-lightbox-slick slick-caption-#{ @options.captionPosition }">#{ links.join('') }</div>
+    <div class="nx-slick-lightbox nx-slick-lightbox-hide-init#{ if @isIE then ' nx-slick-lightbox-ie' else '' }" style="background: #{ @options.background };">
+      <div class="nx-slick-lightbox-inner">
+        <div class="nx-slick-lightbox-slick nx-slick-caption-#{ @options.captionPosition }">#{ links.join('') }</div>
       <div>
     <div>
     """
     @$modalElement = $(html)
     @$parts = {}
     @$parts['closeButton'] = $(@options.layouts.closeButton)
-    @$modalElement.find('.slick-lightbox-inner').append @$parts['closeButton']
+    @$modalElement.find('.nx-slick-lightbox-inner').append @$parts['closeButton']
     $('body').append @$modalElement
 
   initSlick: (index) ->
@@ -110,9 +110,9 @@ class SlickLightbox
         # TODO: support element's index
         @slick = @options.slick @$modalElement
       else
-        @slick = @$modalElement.find('.slick-lightbox-slick').nxSlick $.extend({}, @options.slick, additional)
+        @slick = @$modalElement.find('.nx-slick-lightbox-slick').nxSlick $.extend({}, @options.slick, additional)
     else
-      @slick = @$modalElement.find('.slick-lightbox-slick').nxSlick(additional)
+      @slick = @$modalElement.find('.nx-slick-lightbox-slick').nxSlick(additional)
     @$modalElement.trigger 'init.slickLightbox'
 
   open: ->
@@ -121,14 +121,14 @@ class SlickLightbox
     # Fire events
     @$element.trigger 'show.slickLightbox'
     setTimeout (=> @$element.trigger 'shown.slickLightbox'), @getTransitionDuration()
-    @$modalElement.removeClass('slick-lightbox-hide-init')
+    @$modalElement.removeClass('nx-slick-lightbox-hide-init')
 
   close: ->
     ### Closes the lightbox and destroys it, maintaining the original element bindings. ###
     # Fire events
     @$element.trigger 'hide.slickLightbox'
     setTimeout (=> @$element.trigger 'hidden.slickLightbox'), @getTransitionDuration()
-    @$modalElement.addClass('slick-lightbox-hide')
+    @$modalElement.addClass('nx-slick-lightbox-hide')
     @destroy()
 
   bindEvents: ->
@@ -136,10 +136,10 @@ class SlickLightbox
 
     # Slides size needs to be 100%, which can't be achieved easily via CSS on floated elements.
     resizeSlides = =>
-      h = @$modalElement.find('.slick-lightbox-inner').height()
-      @$modalElement.find('.slick-lightbox-slick-item').height h
+      h = @$modalElement.find('.nx-slick-lightbox-inner').height()
+      @$modalElement.find('.nx-slick-lightbox-slick-item').height h
       # max-height on the image is buggy
-      @$modalElement.find('.slick-lightbox-slick-img, .slick-lightbox-slick-item-inner').css 'max-height', Math.round(@options.imageMaxHeight*h)
+      @$modalElement.find('.nx-slick-lightbox-slick-img, .nx-slick-lightbox-slick-item-inner').css 'max-height', Math.round(@options.imageMaxHeight*h)
     $(window).on 'orientationchange.slickLightbox resize.slickLightbox', resizeSlides
     if @options.useHistoryApi
       $(window).on 'popstate.slickLightbox', => @close()
@@ -170,9 +170,9 @@ class SlickLightbox
           @close()  if code is 27
 
     if @options.closeOnBackdropClick
-      @$modalElement.on 'click.slickLightbox touchstart.slickLightbox', '.slick-lightbox-slick-img', (e) ->
+      @$modalElement.on 'click.slickLightbox touchstart.slickLightbox', '.nx-slick-lightbox-slick-img', (e) ->
         e.stopPropagation()
-      @$modalElement.on 'click.slickLightbox', '.slick-lightbox-slick-item', (e) =>
+      @$modalElement.on 'click.slickLightbox', '.nx-slick-lightbox-slick-item', (e) =>
         e.preventDefault()
         @close()
 
@@ -199,7 +199,7 @@ class SlickLightbox
         @options.caption(el, info)
       when 'string'
         $(el).data(@options.caption)
-    return """<span class="slick-lightbox-slick-caption">#{ c }</span>"""
+    return """<span class="nx-slick-lightbox-slick-caption">#{ c }</span>"""
 
   getElementSrc: (el) ->
     ### Returns src for each slide image based on the type of `options.src`. ###
@@ -231,7 +231,7 @@ class SlickLightbox
 
   destroyPrevious: ->
     ### Destroys lightboxes currently in DOM. ###
-    $('body').children('.slick-lightbox').trigger 'destroy.slickLightbox'
+    $('body').children('.nx-slick-lightbox').trigger 'destroy.slickLightbox'
 
   getTransitionDuration: ->
     ### Detects the transition duration to know when to remove stuff from DOM etc. ###
@@ -277,7 +277,7 @@ defaults =
   slick: {}
   useHistoryApi: false
   layouts:
-    closeButton: """<button type="button" class="slick-lightbox-close"></button>"""
+    closeButton: """<button type="button" class="nx-slick-lightbox-close"></button>"""
   shouldOpen: null
   imageMaxHeight: 0.9
   lazy: false
