@@ -13,6 +13,7 @@ shell    = require 'gulp-shell'
 uglify   = require 'gulp-uglifyjs'
 qunit    = require 'node-qunit-phantomjs'
 wrapJS   = require 'gulp-wrap-js'
+lec      = require 'gulp-line-ending-corrector'
 
 #############################
 
@@ -40,6 +41,7 @@ gulp.task 'uglify', ->
   gulp
     .src 'dist/slick-lightbox.js'
     .pipe uglify 'slick-lightbox.min.js', outSourceMap: true
+    .pipe lec()
     .pipe gulp.dest 'dist/'
 
 gulp.task 'coffeedoc', shell.task(['coffeedoc src/scripts/slick-lightbox.coffee'])
