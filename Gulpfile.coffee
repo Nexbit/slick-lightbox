@@ -10,10 +10,12 @@ gutil    = require 'gulp-util'
 http     = require 'http'
 sass     = require 'gulp-sass'
 shell    = require 'gulp-shell'
-uglify   = require 'gulp-uglifyjs'
+uglify   = require 'gulp-uglify'
 qunit    = require 'node-qunit-phantomjs'
 wrapJS   = require 'gulp-wrap-js'
 lec      = require 'gulp-line-ending-corrector'
+maps     = require 'gulp-sourcemaps'
+rename   = require 'gulp-rename'
 
 #############################
 
@@ -32,7 +34,9 @@ gulp.task 'coffee', ->
 gulp.task 'sass', ->
   gulp
     .src 'src/styles/nx-slick-lightbox.sass'
-    .pipe sass(outputStyle: 'compressed').on('error', sass.logError)
+    .pipe maps.init()
+    .pipe sass(outputStyle: 'compact').on('error', sass.logError)
+    .pipe maps.write('./')
     .pipe gulp.dest 'dist/'
 
 #############################
@@ -40,8 +44,10 @@ gulp.task 'sass', ->
 gulp.task 'uglify', ->
   gulp
     .src 'dist/nx-slick-lightbox.js'
-    .pipe uglify 'nx-slick-lightbox.min.js', outSourceMap: true
-    .pipe lec()
+    .pipe maps.init()
+    .pipe uglify { output: { comments: 'some' } }
+    .pipe rename 'nx-slick-lightbox.min.js'
+    .pipe maps.write './'
     .pipe gulp.dest 'dist/'
 
 gulp.task 'coffeedoc', shell.task(['coffeedoc src/scripts/nx-slick-lightbox.coffee'])
